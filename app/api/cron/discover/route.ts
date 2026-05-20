@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { categories } from '@/lib/data';
+import { saveDiscoveryResults } from '@/lib/discovery-store';
 import { searchCreativeCommonsVideos } from '@/lib/youtube';
 
 export async function GET(request: Request) {
@@ -16,6 +17,8 @@ export async function GET(request: Request) {
   for (const category of categories) {
     for (const keyword of category.keywords.slice(0, 2)) {
       const results = await searchCreativeCommonsVideos(keyword);
+      const storage = await saveDiscoveryResults(keyword, results);
+
       discoveryResults.push({
         category: category.name,
         keyword,
@@ -23,6 +26,9 @@ export async function GET(request: Request) {
         queued: results.filter((result) => result.status === 'queued').length,
         approved: results.filter((result) => result.status === 'approved').length,
         rejected: results.filter((result) => result.status === 'rejected').length,
+        saved: storage.saved,
+        storageEnabled: storage.enabled,
+        storageError: storage.error,
         results
       });
     }
@@ -32,7 +38,7 @@ export async function GET(request: Request) {
     status: 'completed',
     startedAt,
     completedAt: new Date().toISOString(),
-    note: 'In production, save these results into Supabase discovery tables and admin review queue.',
+    note: 'Creative Commons discovery completed. Results are saved into Supabase when SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are configured.',
     discoveryResults
   });
 }

@@ -56,6 +56,10 @@ input,button{font:inherit}
 .search-empty{background:white;border:1px solid var(--line);border-radius:8px;padding:18px;color:var(--muted);font-weight:800;box-shadow:0 6px 18px rgba(15,23,42,.05)}
 
 .page{max-width:1180px;margin:0 auto;padding:28px 24px 64px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer}
+.btn-primary{background:#111827;color:white}
+.btn-secondary{background:#eef2f7;color:#334155}
+.btn-danger{background:#fee2e2;color:#991b1b}
 .list-panel,.video-card,.card,.stat-box,.row-card{background:white;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
 .grid{display:grid;gap:16px}
 .grid.cards{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
@@ -72,6 +76,11 @@ input,button{font:inherit}
 .big{font-size:2rem;font-weight:900}
 .small{color:var(--muted)}
 .info-banner{padding:16px;border-radius:16px;background:#fff7ed;color:#9a3412;font-weight:800}
+.error-banner{margin-top:12px;background:#fee2e2;color:#991b1b}
+.review-card h2{margin:8px 0 6px}
+.review-card-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.admin-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.admin-actions form{margin:0}
 .row-card{display:flex;justify-content:space-between;gap:14px;align-items:center}
 .row-card-value{background:rgba(24,119,242,.1);color:var(--blue);padding:8px 12px;border-radius:999px;font-weight:900}
 .inline-back{display:inline-block;color:var(--blue);font-weight:900;margin-bottom:14px}
