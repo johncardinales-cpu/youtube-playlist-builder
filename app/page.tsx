@@ -5,58 +5,54 @@ export default function HomePage() {
   const featured = playlists.slice(0, 6);
 
   return (
-    <main className="social-shell">
-      <aside className="left-rail">
-        <div className="rail-card">
-          <div className="rail-title">Explore</div>
-          {categories.map((category) => (
-            <Link key={category.id} href={`/categories/${category.slug}`} className="rail-link">
-              <span className="rail-icon">{category.icon.slice(0, 1)}</span>
-              <span>{category.name.replace(' and ', ' & ')}</span>
-            </Link>
-          ))}
-        </div>
-      </aside>
+    <main className="home-shell">
+      <div className="topic-row">
+        <Link href="/" className="topic-chip">All</Link>
+        {categories.map((category) => (
+          <Link key={category.id} href={`/categories/${category.slug}`} className="topic-chip">{category.name}</Link>
+        ))}
+      </div>
 
-      <section className="feed">
-        <div className="stories">
-          <Link href="/categories/survival" className="story"><small>Trending</small><strong>Survival Skills</strong></Link>
-          <Link href="/categories/relaxing-music" className="story"><small>Relax</small><strong>Focus Music</strong></Link>
-          <Link href="/categories/motivation" className="story"><small>Daily Push</small><strong>Motivation</strong></Link>
-          <Link href="/categories/things-to-learn" className="story"><small>Learn Fast</small><strong>AI Tutorials</strong></Link>
-        </div>
-
-        <section className="feed-card hero-feed">
-          <h1>Watch smarter. Search less. Learn faster.</h1>
+      <section className="hero-clean">
+        <div className="hero-main">
+          <small>LICENSE-SAFE PLAYLIST DISCOVERY</small>
+          <h1>Find the right playlist faster.</h1>
           <p>
-            A social-style discovery hub for license-safe curated playlists. Users open a topic, choose a clean list,
-            and start watching without falling into random search results.
+            A cleaner video hub for learning, survival, relaxing music, motivation, funny clips, kids learning,
+            and faith content. Less browsing, more watching.
           </p>
-          <div className="feed-actions">
+          <div className="hero-actions">
             <Link href="/admin/discovery" className="btn btn-primary">View Discovery Queue</Link>
             <Link href="/admin/settings" className="btn btn-secondary">Auto Search Settings</Link>
           </div>
-        </section>
+        </div>
+        <div className="quick-panel">
+          <div className="quick-card"><strong>30 min</strong><span>Auto discovery refresh</span></div>
+          <div className="quick-card"><strong>{categories.length}</strong><span>Clean categories</span></div>
+          <div className="quick-card"><strong>{playlists.length}</strong><span>Starter playlists</span></div>
+        </div>
+      </section>
 
-        <div className="feed-section-head">
+      <section>
+        <div className="section-head">
           <div>
             <h2>Recommended playlists</h2>
-            <p>Video-style cards, curated categories, and ready-to-watch topics.</p>
+            <p className="section-copy">Simple video cards with clear purpose and category.</p>
           </div>
           <span className="pill pill-green">Auto-discovery every 30 mins</span>
         </div>
 
-        <div className="video-grid">
+        <div className="playlist-grid">
           {featured.map((playlist) => {
             const category = categories.find((item) => item.id === playlist.categoryId);
             return (
-              <Link key={playlist.id} href={`/playlists/${playlist.slug}`} className="feed-card video-tile">
-                <div className="thumb"><span>{category?.icon}</span></div>
-                <div className="tile-body">
-                  <div className="tile-meta">{playlist.mood} • {playlist.estimatedWatchTime}</div>
+              <Link key={playlist.id} href={`/playlists/${playlist.slug}`} className="playlist-card">
+                <div className="thumb" />
+                <div className="card-body">
+                  <div className="card-meta">{playlist.mood} • {playlist.estimatedWatchTime}</div>
                   <h3>{playlist.title}</h3>
                   <p>{playlist.description}</p>
-                  <div className="tile-tags">
+                  <div className="chip-row">
                     <span className="chip">{playlist.difficulty}</span>
                     <span className="chip">{category?.name}</span>
                   </div>
@@ -66,26 +62,6 @@ export default function HomePage() {
           })}
         </div>
       </section>
-
-      <aside className="right-rail">
-        <div className="side-card">
-          <h3>Platform status</h3>
-          <div className="metric-row">
-            <div className="metric-box"><strong>30m</strong><span>Refresh</span></div>
-            <div className="metric-box"><strong>{categories.length}</strong><span>Categories</span></div>
-            <div className="metric-box"><strong>{playlists.length}</strong><span>Playlists</span></div>
-            <div className="metric-box"><strong>CC</strong><span>Safe mode</span></div>
-          </div>
-        </div>
-        <div className="side-card">
-          <h3>What makes this better</h3>
-          <div className="side-list">
-            <div className="side-item"><span className="side-dot">1</span><div><strong>Clean lists</strong><span>No deep searching</span></div></div>
-            <div className="side-item"><span className="side-dot">2</span><div><strong>License filter</strong><span>Creative Commons direction</span></div></div>
-            <div className="side-item"><span className="side-dot">3</span><div><strong>Admin review</strong><span>Quality before publish</span></div></div>
-          </div>
-        </div>
-      </aside>
     </main>
   );
 }
