@@ -9,19 +9,39 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
   const categoryPlaylists = getPlaylistsByCategoryId(category.id);
 
   return (
-    <main style={{ maxWidth: 1120, margin: '0 auto', padding: 24 }}>
-      <Link href="/" style={{ color: '#0e7490', fontWeight: 700 }}>Back to categories</Link>
-      <h1 style={{ fontSize: 44 }}>{category.name}</h1>
-      <p style={{ color: '#475569', fontSize: 18, maxWidth: 760 }}>{category.description}</p>
-      <section style={{ marginTop: 28, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
-        {categoryPlaylists.map((playlist) => (
-          <Link key={playlist.id} href={`/playlists/${playlist.slug}`} style={{ border: '1px solid #e2e8f0', background: 'white', borderRadius: 18, padding: 20 }}>
-            <div style={{ color: '#0e7490', fontWeight: 700 }}>{playlist.mood} • {playlist.difficulty}</div>
-            <h2>{playlist.title}</h2>
-            <p style={{ color: '#475569', lineHeight: 1.6 }}>{playlist.description}</p>
-            <p style={{ fontWeight: 700 }}>Watch time: {playlist.estimatedWatchTime}</p>
-          </Link>
-        ))}
+    <main className="shell page">
+      <Link href="/" className="inline-back">Back to categories</Link>
+      <section className="list-panel">
+        <span className="pill pill-soft">{category.icon}</span>
+        <h1 className="section-title" style={{ marginTop: 14 }}>{category.name}</h1>
+        <p className="section-copy" style={{ maxWidth: 760 }}>{category.description}</p>
+        <div className="card-tags">
+          {category.keywords.map((keyword) => <span key={keyword} className="chip">{keyword}</span>)}
+        </div>
+      </section>
+
+      <section>
+        <div className="section-head">
+          <div>
+            <h2 className="section-title">Ready playlists</h2>
+            <p className="section-copy">Open a curated playlist instead of searching deeply.</p>
+          </div>
+          <span className="pill pill-success">{categoryPlaylists.length} playlist{categoryPlaylists.length !== 1 ? 's' : ''}</span>
+        </div>
+
+        <div className="grid playlists">
+          {categoryPlaylists.map((playlist) => (
+            <Link key={playlist.id} href={`/playlists/${playlist.slug}`} className="card">
+              <div className="card-topline">{playlist.mood} • {playlist.difficulty}</div>
+              <h2>{playlist.title}</h2>
+              <p>{playlist.description}</p>
+              <div className="card-tags">
+                <span className="chip">{playlist.estimatedWatchTime}</span>
+                <span className="chip">{playlist.bestFor}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
     </main>
   );
