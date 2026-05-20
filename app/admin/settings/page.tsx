@@ -1,5 +1,6 @@
 export default function SettingsPage() {
   const rows = [
+    ['Theme direction', 'Professional social-inspired'],
     ['License mode', 'Strict'],
     ['Search interval', 'Every 30 minutes'],
     ['Video discovery', 'On'],
@@ -12,14 +13,19 @@ export default function SettingsPage() {
   ];
 
   return (
-    <main style={{ maxWidth: 900, margin: '0 auto', padding: 24 }}>
-      <h1 style={{ fontSize: 42 }}>Best Settings</h1>
-      <p style={{ color: '#475569' }}>Launch settings for safe curated playlist discovery.</p>
-      <div style={{ marginTop: 24, display: 'grid', gap: 12 }}>
+    <main className="shell page">
+      <div className="section-head">
+        <div>
+          <h1 className="section-title">Best Settings</h1>
+          <p className="section-copy">Safe defaults for launch while the app is still growing.</p>
+        </div>
+        <span className="pill pill-success">Current launch preset</span>
+      </div>
+      <div className="grid" style={{ gap: 12 }}>
         {rows.map(([name, value]) => (
-          <div key={name} style={{ display: 'flex', justifyContent: 'space-between', background: 'white', padding: 18, borderRadius: 16 }}>
-            <span style={{ fontWeight: 700 }}>{name}</span>
-            <span style={{ background: '#cffafe', color: '#155e75', padding: '6px 10px', borderRadius: 999, fontWeight: 700 }}>{value}</span>
+          <div key={name} className="row-card">
+            <strong>{name}</strong>
+            <span className="row-card-value">{value}</span>
           </div>
         ))}
       </div>
